@@ -1,11 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <div class="p-4 container">
+      <!-- URL Input -->
+      <form data-form action="">
+        <div class="mb-4 flex">
+          <select
+            data-method
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
+          >
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="PATCH">PATCH</option>
+            <option value="DELETE">DELETE</option>
+          </select>
+          <input
+            data-url
+            type="url"
+            placeholder="https://example.com"
+            id="url"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+            placeholder=""
+            required
+          />
+          <button
+            type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-r-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+
+      <!-- Tab Container -->
+      <div>
+        <div class="mb-4 border-b border-gray-200 ">
+          <ul
+            class="flex flex-wrap -mb-px text-sm font-medium text-center"
+            id="default-tab"
+            data-tabs-toggle="#default-tab-content"
+            role="tablist"
+          >
+            <li class="me-2" role="presentation">
+              <button
+                class="inline-block p-4 border-b-2 rounded-t-lg"
+                id="query-params-tab"
+                data-tabs-target="#queryParam"
+                type="button"
+                role="tab"
+                aria-controls="queryParam"
+                aria-selected="false"
+              >
+                Query Params
+              </button>
+            </li>
+            <li class="me-2" role="presentation">
+              <button
+                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 "
+                id="headers-tab"
+                data-tabs-target="#headers"
+                type="button"
+                role="tab"
+                aria-controls="headers"
+                aria-selected="false"
+              >
+                Headers
+              </button>
+            </li>
+            <li class="me-2" role="presentation">
+              <button
+                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 "
+                id="json-tab"
+                data-tabs-target="#json"
+                type="button"
+                role="tab"
+                aria-controls="json"
+                aria-selected="false"
+              >
+                JSON
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div id="default-tab-content">
+          <div
+            class="hidden p-4 rounded-lg bg-gray-50 "
+            id="queryParam"
+            role="tabpanel"
+            aria-labelledby="query-param-tab"
+          >
+            <div data-query-params></div>
+            <button
+              data-add-query-param-btn
+              type="button"
+              class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-5 py-2.5 me-2 mb-2 text-sm "
+            >
+              Add
+            </button>
+          </div>
+          <div
+            class="hidden p-4 rounded-lg bg-gray-50 "
+            id="headers"
+            role="tabpanel"
+            aria-labelledby="headers-tab"
+          >
+            <div data-request-headers></div>
+            <button
+              data-add-request-header-param-btn
+              type="button"
+              class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+            >
+              Add
+            </button>
+          </div>
+          <div
+            class="hidden p-4 rounded-lg bg-gray-50"
+            id="json"
+            role="tabpanel"
+            aria-labelledby="json-tab"
+          >
+            <div
+              data-json-request-body
+              class="overflow-auto max-h-[200px]"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result area -->
+      <div class="mt-5 hidden" data-response-section>
+        <h1 class="text-2xl">Response</h1>
+
+        <div class="flex my-2">
+          <div class="mr-3">Status: <span data-status></span></div>
+          <div class="mr-3">Time: <span data-time></span> ms</div>
+          <div class="mr-3">Size: <span data-size></span></div>
+        </div>
+
+        <!-- Tabs -->
+        <div>
+          <div class="mb-4 border-b border-gray-200">
+            <ul
+              class="flex flex-wrap -mb-px text-sm font-medium text-center"
+              id="default-tab"
+              data-tabs-toggle="#default-tab-content"
+              role="tablist"
+            >
+              <li class="me-2" role="presentation">
+                <button
+                  class="inline-block p-4 border-b-2 rounded-t-lg"
+                  id="body-response-tab"
+                  data-tabs-target="#bodyResponse"
+                  type="button"
+                  role="tab"
+                  aria-controls="queryParam"
+                  aria-selected="false"
+                >
+                  Body
+                </button>
+              </li>
+              <li class="me-2" role="presentation">
+                <button
+                  class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 "
+                  id="headers-response-tab"
+                  data-tabs-target="#headersResponse"
+                  type="button"
+                  role="tab"
+                  aria-controls="headersResponse"
+                  aria-selected="false"
+                >
+                  Headers
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div id="default-tab-content">
+            <div
+              class="hidden p-4 rounded-lg bg-gray-50"
+              id="bodyResponse"
+              role="tabpanel"
+              aria-labelledby="body-response-tab"
+            >
+              <div data-json-response-body></div>
+            </div>
+            <div
+              class="hidden p-4 rounded-lg bg-gray-50"
+              id="headersResponse"
+              role="tabpanel"
+              aria-labelledby="headers-response-tab"
+            >
+              <div class="grid grid-cols-2 gap-5" data-response-headers>
+                <div>help</div>
+                <div>okay</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <template data-key-value-template>
+      <div class="flex items-center justify-center my-2" data-key-value-pair>
+        <input
+          data-key
+          placeholder="Key"
+          class="bg-gray-50 border rounded-l-lg border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  "
+        />
+        <input
+          data-value
+          placeholder="Value"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+        />
+        <button
+          type="button"
+          class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-r-lg text-sm px-5 py-2.5 me-2 "
+          data-remove-btn
+        >
+          Remove
+        </button>
+      </div>
+    </template>
+  </body>
+  <script src="script.js" type="module"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </html>
