@@ -4,7 +4,7 @@
 
 # ros-man
 
-A custom Postman clone built in plain JS. Demo: 
+A custom Postman clone built in plain JS. Demo: https://rosman.netlify.app/
 
 ## Features
 
